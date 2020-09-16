@@ -1,3 +1,3 @@
 # Octabot
 Octabot is a discord bot made on python with the use of discord.py
-All the songs located within 'Octagon' are not owned by me. They can all be located on www.youtube.com and/or www.soundcloud.com
+Not every song on the live bot is located within 'Octagon'. The three songs are just examples and can be found on youtube. I did not make any of the songs with the 'Octagon' directory

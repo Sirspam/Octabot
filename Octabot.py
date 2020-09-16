@@ -38,4 +38,4 @@ async def on_guild_remove(ctx):
     servers = list(client.guilds)
     logging.info(f"Bot has been removed from a guild. The bot is now connected to {servers}")
 
-client.run('dQw4w9WgXcQ')
+client.run('Token')
