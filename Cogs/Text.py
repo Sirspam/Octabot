@@ -42,10 +42,11 @@ class Text(commands.Cog):
         embed = discord.Embed(
             title = "Holy **fuck**",
             description = "I am in so much pain",
-            colour = discord.Colour.blue()
+            colour = discord.Colour.lighter_gray()
         )
         embed.set_footer(text='Put me down like a stray dog uwu')
-        embed.set_image(url="https://cdn.discordapp.com/attachments/493836827887796225/754493482726326393/Ehv1QqhWAAY0Tfa.png") #Link might die, idk how long Discord keeps these files for
+        embed.set_image(url="https://images-ext-1.discordapp.net/external/vmJTDHWjyNjhiDcVFg64v46EHZU4lFjemiAjJ509Lbk/https/media.discordapp.net/attachments/461381136661217283/759857423736897586/image0-2-1-1.gif?width=593&height=703") #Link might die, idk how long Discord keeps these files for
+        #https://cdn.discordapp.com/attachments/493836827887796225/754493482726326393/Ehv1QqhWAAY0Tfa.png
         await ctx.send(embed=embed)
 
     @commands.Cog.listener()
