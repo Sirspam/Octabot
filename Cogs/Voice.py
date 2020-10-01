@@ -5,7 +5,8 @@ from discord import FFmpegPCMAudio
 cwd = os.getcwd()
 shuffleallqueue = {}
 song = []
-
+#Currently shuffleall is a mess, I'm surprised it even works. While the bot will queue and play all the songs within the octagon directory, it won't message when a new song starts playing, apart from the very first song where the bot will send a message but it'll be displaying the wrong song name.
+#Also I've not made it possible to clear the entire queue so to stop the bot it'll either have to be restarted or let the entire queue finish.
 def shuffleallnext (voice):
     cwd = os.getcwd()
     if voice in shuffleallqueue:

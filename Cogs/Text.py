@@ -51,7 +51,7 @@ class Text(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author == self.client.user: #Checks that the poster isn't the bot so it doesn't get stuck in some dumb endless loop or something idk
+        if message.author == self.client.user: #Checks that the poster isn't the bot so it doesn't get stuck in some dumb endless loop or something, I'm not sure the tutorial I watched just insisted this should be here
             return
         if message.content.startswith ('Octagon') or message.content.startswith ('octagon'): #Reacts to the word 'octagon' beacuse why not lol
             await message.add_reaction('\U0001f6d1')
