@@ -28,11 +28,11 @@ class Text(commands.Cog):
         embed.add_field(name="join", value="> Has Octabot join the voice channel you're currently in", inline = False)
         embed.add_field(name="leave", value="> Has Octabot leave the voice channel he's currently in", inline= False)
         embed.add_field(name="play <song>", value="> Plays a specified song. Only the listed songs shown in the list command will work", inline = False)
+        embed.add_field(name="shuffle", value="> Plays a random octagon song", inline = False)                
+        embed.add_field(name="shuffleall", value="> Adds every song at a random order into a queue (WIP)", inline = False)
         embed.add_field(name="pause",value="> Pauses the song currently playing")
         embed.add_field(name="resume",value="> Resumes the current song if paused")
-        embed.add_field(name="stop",value="> Stops the song currently playing. This will skip to the next song if using shuffleall")
-        embed.add_field(name="shuffle", value="> Plays a random octagon song", inline = False)
-        embed.add_field(name="shuffleall", value="> Adds every song at a random order into a queue (WIP)", inline = False)
+        embed.add_field(name="stop",value="> Stops the song currently playing. This will skip to the next song if using shuffleall")          
         embed.set_footer(text="Got any feedback or recommendations for Octabot? DM Sirspam#7765")
         await ctx.send(embed=embed)
         
@@ -51,7 +51,7 @@ class Text(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author == self.client.user: #Checks that the poster isn't the bot so it doesn't get stuck in some dumb endless loop or something, I'm not sure the tutorial I watched just insisted this should be here
+        if message.author == self.client.user: #Checks that the poster isn't the bot so it doesn't get stuck in some dumb endless loop or something idk
             return
         if message.content.startswith ('Octagon') or message.content.startswith ('octagon'): #Reacts to the word 'octagon' beacuse why not lol
             await message.add_reaction('\U0001f6d1')

@@ -1,21 +1,21 @@
-import discord, logging, os, os.path,random
+import discord, logging, os, os.path,random, asyncio
 from discord.ext import commands
 from discord.utils import get
 from discord import FFmpegPCMAudio
 cwd = os.getcwd()
 shuffleallqueue = {}
 song = []
-#Currently shuffleall is a mess, I'm surprised it even works. While the bot will queue and play all the songs within the octagon directory, it won't message when a new song starts playing, apart from the very first song where the bot will send a message but it'll be displaying the wrong song name.
-#Also I've not made it possible to clear the entire queue so to stop the bot it'll either have to be restarted or let the entire queue finish.
+nextsong = ()
+
 def shuffleallnext (voice):
+    global nextsong
     cwd = os.getcwd()
     if voice in shuffleallqueue:
         songvoice = (shuffleallqueue[voice])
         nextsong = (songvoice[0])
         del songvoice[0]
         nextsongdir = FFmpegPCMAudio(f"{cwd}\\Octagon\\"+nextsong)
-        voice.play (nextsongdir, after=lambda e: shuffleallnext(voice))
-        return (nextsong)
+        voice.play (nextsongdir, after= lambda e: shuffleallnext(voice))  
     else:
         for filename in os.listdir(f"{cwd}\\Octagon"):
             if filename.endswith(".mp3"):
@@ -26,17 +26,17 @@ def shuffleallnext (voice):
         nextsong = (songvoice[0])
         del songvoice[0]
         nextsongdir = FFmpegPCMAudio(f"{cwd}\\Octagon\\"+nextsong)
-        print (shuffleallqueue)
-        return (nextsong, nextsongdir)
+        return (nextsongdir)
 
 class Voice(commands.Cog):
     def __init__(self, client):
         self.client = client
-    
+
+        
     @commands.Cog.listener()
     async def on_ready(self):
         logging.info("Voice cog loaded")
-
+    
     @commands.command()
     async def list(self, ctx):
         message = (str(""))
@@ -70,6 +70,7 @@ class Voice(commands.Cog):
     @commands.command(pass_context=True)
     async def join(self, ctx):
         voice = get(self.client.voice_clients, guild=ctx.guild)
+        channel = ctx.author.voice.channel
         if ctx.author.voice is None: #For whatever reason this line didn't want to work while channel = was above it
             await ctx.send ("You need to be in a voice channel for me to join!")
             return
@@ -84,10 +85,16 @@ class Voice(commands.Cog):
     
     @commands.command()
     async def leave(self, ctx):
+        #print (shuffleallqueue)
+        voice = get(self.client.voice_clients, guild=ctx.guild)
         if ctx.message.author.voice:
-            #await message.add_reaction('\U0001f6d1')
+            if voice.is_playing():
+                voice.stop()
+                await asyncio.sleep(1)
+                if voice in shuffleallqueue:
+                    del ctx.guild
             await ctx.voice_client.disconnect()
-
+    
     @commands.command(pass_context=True)
     async def play(self, ctx, *, song):
         voice = get(self.client.voice_clients, guild=ctx.guild)
@@ -166,10 +173,11 @@ class Voice(commands.Cog):
         else:
             voice = await channel.connect()
 
-        source = (shuffleallnext(voice)[1])
+        source = (shuffleallnext(voice))
         print (source)
-        songvoice = (shuffleallqueue[voice])
-        await ctx.send ("Now playing"+(songvoice[0]))
+        #songvoice = (shuffleallqueue[voice])
+        #await ctx.send ("Now playing"+(songvoice[0]))
+        await ctx.send ("Now playing all songs!\nYou can use 'songinfo' to see what song is playing.")
         voice.play (source, after=lambda e: shuffleallnext(voice))
         print (shuffleallqueue)
 
