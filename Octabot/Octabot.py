@@ -2,7 +2,7 @@ import discord, logging, os, os.path, random
 from discord.ext import commands
 from discord.utils import get
 from discord import FFmpegPCMAudio
-logging.basicConfig(format= '%(asctime)s:%(levelname)s:%(name)s: %(message)s',filename='Octalog.log',level=logging.DEBUG)
+logging.basicConfig(format= '%(asctime)s:%(levelname)s:%(name)s: %(message)s',filename='Octalog.log',level=logging.INFO)
 cwd = os.getcwd()
 intents = discord.Intents.default()
 client = commands.Bot(command_prefix = 'oct$', intents=intents)
@@ -39,4 +39,7 @@ async def on_guild_remove(ctx):
     servers = list(client.guilds)
     logging.info(f"Bot has been removed from a guild. The bot is now connected to {servers}")
 
-client.run('Token') #The bot's actual token has been removed from this version of the bot
+File = open("Token.txt", "r")
+Token = File.read()
+File.close()
+client.run(Token) #I've made it so the token is read from an external file. This is just so I don't have to edit out the token whenever uploading to the github registory
