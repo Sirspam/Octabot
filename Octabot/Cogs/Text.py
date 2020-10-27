@@ -39,6 +39,7 @@ class Text(commands.Cog):
         await ctx.send(embed=embed)
        
     @commands.command()
+    @commands.is_owner()
     async def embedt(self, ctx): #I kept this here just because I find it funny
         embed = discord.Embed(
             title = "Holy **fuck**", #please excuse my foul langauge

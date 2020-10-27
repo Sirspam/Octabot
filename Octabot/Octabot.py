@@ -13,7 +13,8 @@ try: # Catch any errors when loading cogs, can be extremely useful when debuggin
         if filename.endswith(".py"):
            client.load_extension(f"Cogs.{filename[:-3]}")
 except Exception as e:
-    print(f"\Possible fatal error:\n{e}\n\n\This means that the bot has not started correctly!")
+    print(f"Possible fatal error:\n{e}\nThis means that the cogs have not started correctly!")
+    logging.info (f"Possible fatal error:\n{e}\nThis means that the cogs have not started correctly!")
         
 @client.event
 async def on_ready():
@@ -31,13 +32,13 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument): #Gives a message if the required arguments aren't given with a command
         await ctx.send('Please pass in all required arguments')
         client.remove_command('on_command_error')
-        
+
 @client.event
-async def on_guild_join(ctx):
+async def on_guild_join(guild):
     servers = list(client.guilds)
     logging.info(f"Bot has joined a new guild. The bot is now connected to {servers}")
-    try: # Give the server a greeting and explanation of how to get started with the bot.
-        await guild.system_channel.send(content="**:octagonal_sign: Hey! Thanks for inviting me! Use oct$help to get started :wave: **", embed=embed)
+    try: # Posts a greeting message in the guild's system channel. This won't work if the bot doesn't have permissions to post messages in the system channel.
+        await guild.system_channel.send("**Hey, How's it going? I'm Octabot. Use ``oct$help`` to get started!** 🛑")
     except:
         pass
 

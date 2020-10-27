@@ -1,10 +1,15 @@
-import traceback, sys, discord, math, asyncio
+#This entire cog was nicely given by SpectrixDev. This cog handles a number of errors which shouldn't even appear in the bot, such as CommandOnCooldown. As a result this entire cog hasn't been tested for Octabot so there's a slight chance this won't entirely work, but it's probably fine.
+import traceback, sys, discord, math, asyncio, logging
 from discord.ext import commands
 
 class ErrorHandler(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.Cog.listener()
+    async def on_ready(self):
+        logging.info ("ErrorHandler cog loaded")
+    
     async def on_command_error(self, ctx, error):
         """The event triggered when an error is raised while invoking a command.
         ctx   : Context
@@ -34,7 +39,7 @@ class ErrorHandler(commands.Cog):
             return await ctx.send(f"**:no_entry: Oops, I need `{error.missing_perms[0].replace('_', ' ')}` permission to run this command**")
         elif isinstance(error, commands.NotOwner):
             if ctx.command.name.lower() == "devchat":
-                 return await ctx.send("uhh no. This is for Spectrix. Please just mention me if you'd like to chat!")
+                 return await ctx.send("uhh no. This is for Sirspam. Please just mention me if you'd like to chat!")
             else:
                  return await ctx.send('**:no_entry: Only my owner can run this command.**')
         elif isinstance(error, commands.CommandOnCooldown):
