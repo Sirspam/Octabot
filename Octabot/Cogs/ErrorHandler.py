@@ -7,9 +7,6 @@ class ErrorHandler(commands.Cog):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_ready(self):
-        logging.info ("ErrorHandler cog loaded")
-    
     async def on_command_error(self, ctx, error):
         """The event triggered when an error is raised while invoking a command.
         ctx   : Context
@@ -49,5 +46,9 @@ class ErrorHandler(commands.Cog):
         print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
         traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
                 
+    @commands.Cog.listener()
+    async def on_ready(self):
+        logging.info ("ErrorHandler cog loaded")
+
 def setup(bot):
     bot.add_cog(ErrorHandler(bot))

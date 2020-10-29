@@ -5,7 +5,7 @@ from discord import FFmpegPCMAudio
 logging.basicConfig(format= '%(asctime)s:%(levelname)s:%(name)s: %(message)s',filename='Octalog.log',level=logging.INFO)
 cwd = os.getcwd()
 intents = discord.Intents.default()
-client = commands.Bot(command_prefix = commands.when_mentioned_or("oct$"), intents=intents, case_insensitive=True) # Allows you to mention the bot instead of prefix and ignores caps, for better user experience
+client = commands.Bot(command_prefix = commands.when_mentioned_or("oct$"), intents=intents, case_insensitive=True, owner_id = (232574143818760192)) # Allows you to mention the bot instead of prefix and ignores caps, for better user experience
 client.remove_command('help')
 
 try: # Catch any errors when loading cogs, can be extremely useful when debugging

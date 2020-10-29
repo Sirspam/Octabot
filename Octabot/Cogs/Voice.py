@@ -198,7 +198,7 @@ class Voice(commands.Cog):
         if voice in shuffleallqueue:
             del shuffleallqueue[voice]
             await ctx.send("Shuffle queue cleared!")
-        if voice not in shuffleallqueue: 
+        elif voice not in shuffleallqueue: 
             await ctx.send("The shuffle queue is already cleared!")
 
 def setup(client):
