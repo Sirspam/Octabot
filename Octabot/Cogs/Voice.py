@@ -6,7 +6,7 @@ cwd = os.getcwd()
 shuffleallqueue = {}
 song = []
 
-def shuffleallnext (voice):
+def shuffleallnext (voice): #This entire function is a mess but it works so I'll leave it alone
     global nextsong
     cwd = os.getcwd()
     if voice in shuffleallqueue:
@@ -71,11 +71,11 @@ class Voice(commands.Cog):
         except discord.Forbidden:
             await ctx.send("I can't DM you the list, Check that you've got DMs enabled!")
     
-    @commands.command(pass_context=True)
+    @commands.command()
     async def join(self, ctx):
         voice = get(self.client.voice_clients, guild=ctx.guild)
-        channel = ctx.author.voice.channel
-        if ctx.author.voice is None: #For whatever reason this line didn't want to work while channel = was above it
+        channel = ctx.message.author.voice
+        if channel is None:
             await ctx.send ("You need to be in a voice channel for me to join!")
             return
         #elif voice.is_playing(): This doesn't work, likely because the bot is always outputting silent audio for some reason.
@@ -98,16 +98,16 @@ class Voice(commands.Cog):
                 del shuffleallqueue[voice]
             await ctx.voice_client.disconnect()
     
-    @commands.command(pass_context=True)
+    @commands.command()
     async def play(self, ctx, *, song):
         voice = get(self.client.voice_clients, guild=ctx.guild)
-        if voice == None:
+        if voice is None:
             await ctx.send ("I'm not in a voice channel! Try using oct$join")
             return
         elif voice.is_playing():
             voice.stop()
         song = (song+'.mp3')
-        if not os.path.exists(f"{cwd}\\Octagon\\"+song): #"{}\\Songs".format(cwd)
+        if not os.path.exists(f"{cwd}\\Octagon\\"+song):
             await ctx.send ("That song doesn't exist! Do oct$list to check what songs can be played.")
             return
         source = FFmpegPCMAudio(f"{cwd}\\Octagon\\"+song)
@@ -116,25 +116,25 @@ class Voice(commands.Cog):
         await ctx.send ("Now playing "+song)
         logging.info (f"Bot playing {song} in guild id:{ctx.client.guild.id}")
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def pause(self, ctx):
         voice = get(self.client.voice_clients, guild=ctx.guild)
         if voice.is_playing():
             voice.pause()
             await ctx.send ("Song paused!")
         if voice == None:
-            print ("I'm not in a voice channel!")
+            await ctx.send ("I'm not in a voice channel!")
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def resume(self, ctx):
         voice = get(self.client.voice_clients, guild=ctx.guild)
         if not voice.is_playing():
             voice.resume()
             await ctx.send ("Song resumed!")
         if voice == None:
-            print ("I'm not in a voice channel!")
+            await ctx.send ("I'm not in a voice channel!")
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def stop(self, ctx):
         voice = get(self.client.voice_clients, guild=ctx.guild)
         if voice.is_playing():
@@ -144,18 +144,20 @@ class Voice(commands.Cog):
         if ctx.voice_client is None:
             await ctx.send ("I'm not in a voice channel!")
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def shuffle(self, ctx):
-        channel = ctx.message.author.voice.channel
         voice = get(self.client.voice_clients, guild=ctx.guild)
-        if voice.is_playing():
-            voice.stop()
-        elif channel is None:
+        channel = ctx.message.author.voice
+        if channel is None:
             await ctx.send("You need to be in a voice chat for me to join!")
             return
-        elif voice and voice.is_connected():
+        if voice.is_playing():
+            voice.stop()
+        if voice and voice.is_connected():
+            channel = ctx.author.voice.channel
             await voice.move_to(channel)
         else:
+            channel = ctx.author.voice.channel
             voice = await channel.connect()
         song = (random.choice(os.listdir(f"{cwd}\\Octagon")))
         source = FFmpegPCMAudio(f"{cwd}\\Octagon\\"+song)
@@ -163,24 +165,26 @@ class Voice(commands.Cog):
         song = song[:-4]
         await ctx.send ("Now playing "+song)
 
-    @commands.command(pass_context=True) #This is still a bit of a mess from me trying to debug it, I'm not 100% certain that it works so I'll leave it alone
+    @commands.command() #This is still a bit of a mess from me trying to debug it, I'm not 100% certain that it works so I'll leave it alone
     async def shuffleall(self, ctx):
-        channel = ctx.message.author.voice.channel
         voice = get(self.client.voice_clients, guild=ctx.guild)
-        if voice.is_playing():
-            voice.stop()
-        elif channel is None:
+        channel = ctx.message.author.voice
+        if channel is None:
             await ctx.send("You need to be in a voice chat for me to join!")
             return
-        elif voice and voice.is_connected():
+        if voice.is_playing():
+            voice.stop()
+        if voice and voice.is_connected():
+            channel = ctx.author.voice.channel
             await voice.move_to(channel)
         else:
+            channel = ctx.author.voice.channel
             voice = await channel.connect()
         source = (shuffleallnext(voice))
         await ctx.send ("Now playing all songs!\nYou can use 'shuffleinfo' to see what song is playing.")
         voice.play (source, after=lambda e: shuffleallnext(voice))
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def shuffleinfo(self, ctx):
         voice = get(self.client.voice_clients, guild=ctx.guild)
         if voice not in shuffleallqueue:
@@ -192,7 +196,7 @@ class Voice(commands.Cog):
         snextestsong = (str(nextestsong[:-4]))
         await ctx.send(f"{snextsong} is currently playing!\n{snextestsong} is next in the queue!")
     
-    @commands.command(pass_context=True)
+    @commands.command()
     async def shuffleclear(self, ctx):
         voice = get(self.client.voice_clients, guild=ctx.guild)
         if voice in shuffleallqueue:
