@@ -45,7 +45,7 @@ All of these commands have the ```oct$``` prefix before them!
 | resume | Resumes the current song if paused |
 | stop | Stops the current song playing. This will also skip to the next song if using shuffleall |
 
-#OctaGame commands
+# OctaGame commands
 All of these commands have the ```oct$game``` prefix before them!
 | Command | Description |
 | --- | --- |
