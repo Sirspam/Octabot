@@ -12,7 +12,6 @@ class Text(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         logging.info ("Text cog loaded")
-        
 
     @commands.command() #Ping command
     async def ping(self, ctx):
@@ -27,21 +26,21 @@ class Text(commands.Cog):
         )
         #embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/726579710254907493/3e749e3736c2d175aeabc4a21c2a5dcc.webp?size=256") the bot's pfp, just in case.
         embed.set_thumbnail(url="https://i.kym-cdn.com/photos/images/newsfeed/001/850/863/e5d.gif")
-        embed.add_field(name="help", value="> Summons this message!", inline = False)
-        embed.add_field(name="ping", value="> Pings Octabot and displays the latency", inline = False)
-        embed.add_field(name="search",value="> Looks for an octagon in a given image attachment", inline = False)  
-        embed.add_field(name="game <argument>", value="> Help Octabot find an Octagon! Use ``oct$game help`` to get started! ", inline = False)        
-        embed.add_field(name="list", value="> Directly messages you a list of all the octagon tunes which Octabot has!", inline = False)
-        embed.add_field(name="join", value="> Has Octabot join the voice channel you're currently in", inline = False)
-        embed.add_field(name="leave", value="> Has Octabot leave the voice channel he's currently in", inline= False)
-        embed.add_field(name="play <song>", value="> Plays a specified song. Only the listed songs shown in the list command will work", inline = False)
-        embed.add_field(name="shuffle", value="> Plays a random octagon song", inline = False)                
-        embed.add_field(name="shuffleall", value="> Adds every song at a random order into a queue", inline = False)
-        embed.add_field(name="shuffleinfo",value="> Post the name of the song currently playing in the shuffle queue", inline = False)
-        embed.add_field(name="shuffleclear",value="> Clears all songs in the shuffle queue", inline = False)
-        embed.add_field(name="pause",value="> Pauses the song currently playing")
-        embed.add_field(name="resume",value="> Resumes the current song if paused")
-        embed.add_field(name="stop",value="> Stops the song currently playing. This will skip to the next song if using shuffleall")   
+        embed.add_field(name="Help", value="> Summons this message!", inline = False)
+        embed.add_field(name="Ping", value="> Pings Octabot and displays the latency", inline = False)
+        embed.add_field(name="Search",value="> Looks for an octagon in a given image attachment", inline = False)  
+        embed.add_field(name="Game <argument>", value="> Help Octabot find an Octagon! Use ``oct$game help`` to get started! ", inline = False)        
+        embed.add_field(name="List", value="> Directly messages you a list of all the octagon tunes which Octabot has!", inline = False)
+        embed.add_field(name="Join", value="> Has Octabot join the voice channel you're currently in", inline = False)
+        embed.add_field(name="Leave", value="> Has Octabot leave the voice channel he's currently in", inline= False)
+        embed.add_field(name="Play <song>", value="> Plays a specified song. Only the listed songs shown in the list command will work", inline = False)
+        embed.add_field(name="Shuffle", value="> Plays a random octagon song", inline = False)                
+        embed.add_field(name="Shuffleall", value="> Adds every song at a random order into a queue", inline = False)
+        embed.add_field(name="Shuffleinfo",value="> Post the name of the song currently playing in the shuffle queue", inline = False)
+        embed.add_field(name="Shuffleclear",value="> Clears all songs in the shuffle queue", inline = False)
+        embed.add_field(name="Pause",value="> Pauses the song currently playing")
+        embed.add_field(name="Resume",value="> Resumes the current song if paused")
+        embed.add_field(name="Stop",value="> Stops the song currently playing. This will skip to the next song if using shuffleall")   
         embed.set_footer(text="Got any feedback or recommendations for Octabot? DM Sirspam#7765")
         await ctx.send(embed=embed)
        

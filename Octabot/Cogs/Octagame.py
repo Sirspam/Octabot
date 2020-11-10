@@ -39,7 +39,7 @@ class Octagame(commands.Cog):
             )
             embed.set_thumbnail(url="https://thumbs.gfycat.com/PresentOilyErin-max-1mb.gif")
             embed.add_field(name="Help", value="Summons this message!")
-            embed.add_field(name="Stats (WIP)", value="Posts your OctaGame stats!")
+            embed.add_field(name="Stats", value="Posts your OctaGame stats!")
             embed.add_field(name="Easy", value="Features a single row of 8 emotes! (Only requires the X coordinate)\n> 1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣\n> 🛑🛑🛑🛑🛑🛑🛑🛑", inline = False)
             embed.add_field(name="Normal", value ="Features four rows of 32 emotes! \n> ⬛1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣\n> 1️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 2️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 3️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 4️⃣🛑🛑🛑🛑🛑🛑🛑🛑", inline = False)
             embed.add_field(name="Hard", value ="Features eight rows of 64 emotes! \n> ⬛1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣\n> 1️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 2️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 3️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 4️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 5️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 6️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 7️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 8️⃣🛑🛑🛑🛑🛑🛑🛑🛑", inline = False) #What a funny and long line 
@@ -163,7 +163,7 @@ class Octagame(commands.Cog):
             await ctx.send(embed=embed)
             #I'm not entirely happy with how this embed looks but I'm not sure what to change
         else:
-            ctx.send("That's not a valid command! Use ``oct$game help`` for help!")
+            await ctx.send("That's not a valid command! Use ``oct$game help`` for help!")
 
 def setup(client):    
     client.add_cog(Octagame(client))
