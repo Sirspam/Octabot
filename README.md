@@ -23,14 +23,14 @@ If you want context for the theme of this bot, search "Octagon YTPMV" on Youtube
 
 ## Commands
 All of these commands have the ```oct$``` prefix before them!
-# General commands
+### General commands
 | Command | Description |
 | --- | --- |
 | help | Summons an embed message displaying and explaining all of these commands. |
 | ping | Pings the bot. Returns how long this took in milliseconds. |
 | search | Requires an image to be attached with the message. Returns an image highlighting any octagons in the attached image. |
 
-# Voice commands
+### Voice commands
 | Command | Description |
 | --- | --- |
 | list | Sends a list of all the mp3 files saved within the Octagon directory. This list will be sent to the message author's direct messages. |
@@ -45,7 +45,7 @@ All of these commands have the ```oct$``` prefix before them!
 | resume | Resumes the current song if paused |
 | stop | Stops the current song playing. This will also skip to the next song if using shuffleall |
 
-# OctaGame commands
+### OctaGame commands
 All of these commands have the ```oct$game``` prefix before them!
 | Command | Description |
 | --- | --- |
