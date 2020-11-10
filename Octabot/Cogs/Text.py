@@ -1,9 +1,9 @@
-import discord, logging, os, os.path,random, asyncio
+import discord, logging, os, os.path
 from discord.ext import commands
 from discord.utils import get
 cwd = os.getcwd()
 def Octasearch(dir_in, dir_out):
-    os.system(f'octagon -i "{dir_in}" -o "{dir_out}" --nogui')
+    os.system(f'octagon -i "{dir_in}" -o "{dir_out}" --nogui') #This can probably be done from python instead of cmd but I'm too lazy to figure that out.
 
 class Text(commands.Cog):
     def __init__(self, client):
@@ -12,6 +12,7 @@ class Text(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         logging.info ("Text cog loaded")
+        
 
     @commands.command() #Ping command
     async def ping(self, ctx):
@@ -26,10 +27,11 @@ class Text(commands.Cog):
         )
         #embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/726579710254907493/3e749e3736c2d175aeabc4a21c2a5dcc.webp?size=256") the bot's pfp, just in case.
         embed.set_thumbnail(url="https://i.kym-cdn.com/photos/images/newsfeed/001/850/863/e5d.gif")
-        embed.add_field(name="help", value="> Summons this message", inline = False)
+        embed.add_field(name="help", value="> Summons this message!", inline = False)
         embed.add_field(name="ping", value="> Pings Octabot and displays the latency", inline = False)
         embed.add_field(name="search",value="> Looks for an octagon in a given image attachment", inline = False)  
-        embed.add_field(name="list", value="> Directly messages you a list of all the octagon tunes which some dumb autist has collected", inline = False)
+        embed.add_field(name="game <argument>", value="> Help Octabot find an Octagon! Use ``oct$game help`` to get started! ", inline = False)        
+        embed.add_field(name="list", value="> Directly messages you a list of all the octagon tunes which Octabot has!", inline = False)
         embed.add_field(name="join", value="> Has Octabot join the voice channel you're currently in", inline = False)
         embed.add_field(name="leave", value="> Has Octabot leave the voice channel he's currently in", inline= False)
         embed.add_field(name="play <song>", value="> Plays a specified song. Only the listed songs shown in the list command will work", inline = False)
@@ -75,6 +77,8 @@ class Text(commands.Cog):
             os.remove(dir_out)
         except:
             await ctx.send(f"**Without an attachment how can I find an octagon? How {ctx.author.name}? How?**\nYou need to include an attachment with your message!") #Personally I love this error response message
+
+
 
 def setup(client):    
     client.add_cog(Text(client))

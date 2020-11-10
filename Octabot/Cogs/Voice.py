@@ -1,4 +1,5 @@
-import discord, logging, os, os.path,random, asyncio
+#This cog was just a joy to code
+import discord, logging, os, os.path, random, asyncio
 from discord.ext import commands
 from discord.utils import get
 from discord import FFmpegPCMAudio

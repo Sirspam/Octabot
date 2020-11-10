@@ -1,4 +1,5 @@
-import discord, logging, os, os.path, random
+#Thanks for taking a look at my somewhat functioning bot
+import discord, logging, os, os.path
 from discord.ext import commands
 from discord.utils import get
 from discord import FFmpegPCMAudio
@@ -8,7 +9,7 @@ intents = discord.Intents.default()
 client = commands.Bot(command_prefix = commands.when_mentioned_or("oct$"), intents=intents, case_insensitive=True, owner_id = (232574143818760192)) # Allows you to mention the bot instead of prefix and ignores caps, for better user experience
 client.remove_command('help')
 
-try: # Catch any errors when loading cogs, can be extremely useful when debugging
+try: # Catch any errors when loading cogs, can be extremely useful when debugging (Thanks SpectrixDev!)
     for filename in os.listdir(f'{cwd}\\Cogs'):
         if filename.endswith(".py"):
            client.load_extension(f"Cogs.{filename[:-3]}")
@@ -25,7 +26,7 @@ async def on_ready():
     await client.change_presence(activity=discord.Game(name='Looking for an Octagon! | oct$help'))
 
 @client.event
-async def on_command_error(ctx, error):
+async def on_command_error(ctx, error): #I should move these to the errorhandler cog but this works so it's fine
     if isinstance (error, commands.CommandNotFound): #Gives an error if an invalid command is given
         await ctx.send("This command doesn't exist! use oct$help to check the available commands")
         client.remove_command('on_command_error')
