@@ -3,7 +3,7 @@ Octabot is a discord bot, made with discord.py, with a small handful of features
 
 ## Features
 Octabot's main feature is playing pre-installed mp3 files with additional features such as sending users a list of all installed songs, playing those songs and playing every song in a random order. 
-Octabot also features a small emote game, with saving statistics, and an image classification feature.
+Octabot also features a small emote game where the user has to find an octagon emote out of a field of other emotes. The program features a database to save statistics from this emote game.
 
 More information about the bot's features and commands can be found at the bottom of this Readme!
 
@@ -28,7 +28,7 @@ All of these commands have the ```oct$``` prefix before them!
 | --- | --- |
 | help | Summons an embed message displaying and explaining all of these commands. |
 | ping | Pings the bot. Returns how long this took in milliseconds. |
-| search | Requires an image to be attached with the message. Returns an image highlighting any octagons in the attached image. |
+| search | Requires an image to be attached with the message. Returns an image highlighting any octagons found in the attached image. |
 
 ### Voice commands
 | Command | Description |
