@@ -38,12 +38,12 @@ class Octagame(commands.Cog):
                 colour = 0xff0000,
             )
             embed.set_thumbnail(url="https://thumbs.gfycat.com/PresentOilyErin-max-1mb.gif")
-            embed.add_field(name="Help", value="Summons this message!")
-            embed.add_field(name="Stats", value="Posts your OctaGame stats!")
-            embed.add_field(name="Easy", value="Features a single row of 8 emotes! (Only requires the X coordinate)\n> 1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣\n> 🛑🛑🛑🛑🛑🛑🛑🛑", inline = False)
-            embed.add_field(name="Normal", value ="Features four rows of 32 emotes! \n> ⬛1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣\n> 1️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 2️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 3️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 4️⃣🛑🛑🛑🛑🛑🛑🛑🛑", inline = False)
-            embed.add_field(name="Hard", value ="Features eight rows of 64 emotes! \n> ⬛1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣\n> 1️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 2️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 3️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 4️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 5️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 6️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 7️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n> 8️⃣🛑🛑🛑🛑🛑🛑🛑🛑", inline = False) #What a funny and long line 
-            embed.add_field(name="Response Formatting", value="Make sure to format your response messages as ``x,y``! The x value is shown at the top of the graph while the y value is shown on the left side. As easy only has the x value, the y value isn't needed", inline = False)
+            embed.add_field(name="Help", value="> Summons this message!")
+            embed.add_field(name="Stats", value="> Posts your OctaGame stats!")
+            embed.add_field(name="Easy", value="> Features a single row of 8 emotes! (Only requires the X coordinate)\n1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣\n🛑🛑🛑🛑🛑🛑🛑🛑", inline = False)
+            embed.add_field(name="Normal", value ="> Features four rows of 32 emotes! \n⬛1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣\n1️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n2️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n3️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n4️⃣🛑🛑🛑🛑🛑🛑🛑🛑", inline = False)
+            embed.add_field(name="Hard", value ="> Features eight rows of 64 emotes! \n⬛1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣\n1️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n2️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n3️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n4️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n5️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n6️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n7️⃣🛑🛑🛑🛑🛑🛑🛑🛑\n8️⃣🛑🛑🛑🛑🛑🛑🛑🛑", inline = False) #What a funny and long line 
+            embed.add_field(name="Response Formatting", value="> Make sure to format your response messages as ``x,y``! The x value is shown at the top of the graph while the y value is shown on the left side. As easy only has the x value, the y value isn't needed", inline = False)
             await ctx.send(embed=embed)
         
         elif message.lower() == "easy":
