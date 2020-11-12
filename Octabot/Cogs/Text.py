@@ -77,7 +77,5 @@ class Text(commands.Cog):
         except:
             await ctx.send(f"**Without an attachment how can I find an octagon? How {ctx.author.name}? How?**\nYou need to include an attachment with your message!") #Personally I love this error response message
 
-
-
 def setup(client):    
     client.add_cog(Text(client))

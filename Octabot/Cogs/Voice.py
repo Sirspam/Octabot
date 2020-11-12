@@ -91,6 +91,9 @@ class Voice(commands.Cog):
     @commands.command()
     async def leave(self, ctx):
         voice = get(self.client.voice_clients, guild=ctx.guild)
+        #channel = ctx.message.author.voice
+        if voice is None:
+            await ctx.send ("I'm not in a voice channel!")
         if ctx.message.author.voice:
             if voice.is_playing():
                 voice.stop()
@@ -103,13 +106,13 @@ class Voice(commands.Cog):
     async def play(self, ctx, *, song):
         voice = get(self.client.voice_clients, guild=ctx.guild)
         if voice is None:
-            await ctx.send ("I'm not in a voice channel! Try using oct$join")
+            await ctx.send ("I'm not in a voice channel! Try using ``oct$join``")
             return
         elif voice.is_playing():
             voice.stop()
         song = (song+'.mp3')
         if not os.path.exists(f"{cwd}\\Octagon\\"+song):
-            await ctx.send ("That song doesn't exist! Do oct$list to check what songs can be played.")
+            await ctx.send ("That song doesn't exist! Use ``oct$list`` to check what songs can be played.")
             return
         source = FFmpegPCMAudio(f"{cwd}\\Octagon\\"+song)
         voice.play(source)
@@ -120,30 +123,30 @@ class Voice(commands.Cog):
     @commands.command()
     async def pause(self, ctx):
         voice = get(self.client.voice_clients, guild=ctx.guild)
-        if voice.is_playing():
-            voice.pause()
-            await ctx.send ("Song paused!")
         if voice == None:
             await ctx.send ("I'm not in a voice channel!")
+        elif voice.is_playing():
+            voice.pause()
+            await ctx.send ("Song paused!")
 
     @commands.command()
     async def resume(self, ctx):
         voice = get(self.client.voice_clients, guild=ctx.guild)
-        if not voice.is_playing():
-            voice.resume()
-            await ctx.send ("Song resumed!")
         if voice == None:
             await ctx.send ("I'm not in a voice channel!")
+        elif not voice.is_playing():
+            voice.resume()
+            await ctx.send ("Song resumed!")
 
     @commands.command()
     async def stop(self, ctx):
         voice = get(self.client.voice_clients, guild=ctx.guild)
-        if voice.is_playing():
-            voice.stop()
-            await ctx.send ("Song stopped!")
-            await ctx.send ("<:JackBlackStop:754302092016877589>")
         if ctx.voice_client is None:
             await ctx.send ("I'm not in a voice channel!")
+        elif voice.is_playing():
+            voice.stop()
+            await ctx.send ("Song stopped!")
+            await ctx.send ("<:JackBlackStop:754302092016877589>") #The emote is awfully small if I use /n in the previous ctx.send, so it's sent in a different line
 
     @commands.command()
     async def shuffle(self, ctx):

@@ -3,7 +3,7 @@
 import discord, logging, random, asyncio, sqlite3
 from discord.ext import commands
 from discord.utils import get
-emotes = ["🛑","🟥","⛔","🔴","🏮"] #Annoyingly there's not many emotes that look similar to an octagon. I may add custom emotes to this later
+emotes = ["🛑","🟥","⛔","🔴","🏮","<:weary_octagonal_sign:776004948810661890>"] #Annoyingly there's not many emotes that look similar to an octagon. I may add custom emotes to this later
 xgrid = ("1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣")
 class Octagame(commands.Cog):
     def __init__(self, client):
@@ -49,7 +49,11 @@ class Octagame(commands.Cog):
         elif message.lower() == "easy":
             random_emotes = "".join(random.choices(emotes[1]+emotes[2]+emotes[3]+emotes[4], k = 8))
             pos = random.randint(0,7)
-            random_emotes = random_emotes [:pos] + emotes[0] + random_emotes[pos+1:]
+            chance = random.randint(0,9)
+            if chance == 8:
+                random_emotes = random_emotes [:pos] + emotes[5] + random_emotes[pos+1:]
+            else:
+                random_emotes = random_emotes [:pos] + emotes[0] + random_emotes[pos+1:]
             embed = discord.Embed(
                 title = "Help me find an Octagon!",
                 description = xgrid+"\n"+random_emotes,
@@ -81,8 +85,12 @@ class Octagame(commands.Cog):
                 count = count + 1
             pos = random.randint(0,7)
             random_line = random.randint(0,3)
+            chance = random.randint(0,9)
             temp = random_emotes[random_line] #For whatever reason I couldn't directly use random_emotes[] so I used this method instead 
-            temp = (temp [:pos] + emotes[0] + temp[pos+1:])
+            if chance == 8:
+                temp = (temp [:pos] + emotes[5] + temp[pos+1:])
+            else:
+                temp = (temp [:pos] + emotes[0] + temp[pos+1:])
             random_emotes[random_line] = temp
             embed = discord.Embed(
                 title = "Help me find an Octagon!",
@@ -91,7 +99,6 @@ class Octagame(commands.Cog):
             )
             embed.set_footer(text="Format your answer as 'x,y'!")
             await ctx.send(embed=embed)
-
             xpos = str((pos + 1))
             ypos = str((random_line + 1))
             pos = (f"{xpos},{ypos}")
@@ -117,8 +124,12 @@ class Octagame(commands.Cog):
                 count = count + 1
             pos = random.randint(0,7)
             random_line = random.randint(0,7)
+            chance = random.randint(0,9)
             temp = random_emotes[random_line] #For whatever reason I couldn't directly use random_emotes[] so I used this method instead 
-            temp = (temp [:pos] + emotes[0] + temp[pos+1:])
+            if chance == 8:
+                temp = (temp [:pos] + emotes[5] + temp[pos+1:])
+            else:
+                temp = (temp [:pos] + emotes[0] + temp[pos+1:])
             random_emotes[random_line] = temp
             embed = discord.Embed(
                 title = "Help me find an Octagon!",
