@@ -125,7 +125,7 @@ class Octagame(commands.Cog):
             pos = random.randint(0,7)
             random_line = random.randint(0,7)
             chance = random.randint(0,9)
-            temp = random_emotes[random_line] #For whatever reason I couldn't directly use random_emotes[] so I used this method instead 
+            temp = random_emotes[random_line]
             if chance == 8:
                 temp = (temp [:pos] + emotes[5] + temp[pos+1:])
             else:
@@ -163,18 +163,18 @@ class Octagame(commands.Cog):
             rows = cursor.fetchone()
             db.close()
             embed = discord.Embed(
-                title = f"{ctx.author.name}'s OctaGame Stats",
+                title = f"{ctx.author.display_name}'s OctaGame Stats",
                 colour = 0xff0000,
                 timestamp = ctx.message.created_at
             )
             embed.add_field(name="Easy", value = f"Found {rows[0]} Octagons!", inline = False)
             embed.add_field(name="Normal", value = f"Found {rows[1]} Octagons!", inline = False)
             embed.add_field(name="Hard", value = f"Found {rows[2]} Octagons!", inline = False)
-            embed.set_thumbnail(url=ctx.author.avatar_url)
+            embed.set_thumbnail(url=ctx.author.display_avatar.url)
+            embed.set_footer(text=ctx.guild)
             await ctx.send(embed=embed)
-            #I'm not entirely happy with how this embed looks but I'm not sure what to change
         else:
             await ctx.send("That's not a valid command! Use ``oct$game help`` for help!")
 
-def setup(client):    
-    client.add_cog(Octagame(client))
+async def setup(client):    
+    await client.add_cog(Octagame(client))

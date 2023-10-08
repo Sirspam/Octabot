@@ -79,3 +79,5 @@ class Text(commands.Cog):
 
 def setup(client):    
     client.add_cog(Text(client))
+async def setup(client):    
+    await client.add_cog(Text(client))

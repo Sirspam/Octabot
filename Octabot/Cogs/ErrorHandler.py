@@ -50,5 +50,5 @@ class ErrorHandler(commands.Cog):
     async def on_ready(self):
         logging.info ("ErrorHandler cog loaded")
 
-def setup(bot):
-    bot.add_cog(ErrorHandler(bot))
+async def setup(bot):
+    await bot.add_cog(ErrorHandler(bot))

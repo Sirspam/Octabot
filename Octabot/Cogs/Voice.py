@@ -32,7 +32,6 @@ class Voice(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-        
     @commands.Cog.listener()
     async def on_ready(self):
         logging.info("Voice cog loaded")
@@ -209,5 +208,5 @@ class Voice(commands.Cog):
         elif voice not in shuffleallqueue: 
             await ctx.send("The shuffle queue is already cleared!")
 
-def setup(client):
-    client.add_cog(Voice(client))
+async def setup(client):
+    await client.add_cog(Voice(client))
